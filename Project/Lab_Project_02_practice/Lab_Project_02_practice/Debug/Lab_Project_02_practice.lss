@@ -1,0 +1,379 @@
+
+Lab_Project_02_practice.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000002bc  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000248  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800100  00800100  000002bc  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000002bc  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002ec  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000038  00000000  00000000  0000032c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000076b  00000000  00000000  00000364  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000006c2  00000000  00000000  00000acf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000038f  00000000  00000000  00001191  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  0000008c  00000000  00000000  00001520  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000400  00000000  00000000  000015ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000000ac  00000000  00000000  000019ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000028  00000000  00000000  00001a58  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 97 00 	jmp	0x12e	; 0x12e <__vector_1>
+   8:	0c 94 f2 00 	jmp	0x1e4	; 0x1e4 <__vector_2>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a2 30       	cpi	r26, 0x02	; 2
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 52 00 	call	0xa4	; 0xa4 <main>
+  88:	0c 94 22 01 	jmp	0x244	; 0x244 <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <_Z8pwm_initv>:
+
+ int i;
+
+void pwm_init() {
+	// Set PWM pins (OC1A and OC1B) as output
+	DDRB |= (1 << DDB1) | (1 << DDB2);
+  90:	84 b1       	in	r24, 0x04	; 4
+  92:	86 60       	ori	r24, 0x06	; 6
+  94:	84 b9       	out	0x04, r24	; 4
+	// Fast PWM mode, non-inverted output
+	TCCR1A = (1 << COM1A1) | (1 << COM1B1) | (1 << WGM10) | (1 << WGM11);
+  96:	83 ea       	ldi	r24, 0xA3	; 163
+  98:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7f8080>
+	// No prescaler
+	TCCR1B = (1 << WGM12) | (1 << CS10);
+  9c:	89 e0       	ldi	r24, 0x09	; 9
+  9e:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7f8081>
+  a2:	08 95       	ret
+
+000000a4 <main>:
+}
+
+int main(void) {
+	DDRB &= ~(1 << DDB0);
+  a4:	84 b1       	in	r24, 0x04	; 4
+  a6:	8e 7f       	andi	r24, 0xFE	; 254
+  a8:	84 b9       	out	0x04, r24	; 4
+	PORTB |= (1 << PORTB0);
+  aa:	85 b1       	in	r24, 0x05	; 5
+  ac:	81 60       	ori	r24, 0x01	; 1
+  ae:	85 b9       	out	0x05, r24	; 5
+	DDRC = 0xFF;
+  b0:	8f ef       	ldi	r24, 0xFF	; 255
+  b2:	87 b9       	out	0x07, r24	; 7
+	PORTC &= ~(1 << PORTC0); // out put for in2
+  b4:	88 b1       	in	r24, 0x08	; 8
+  b6:	8e 7f       	andi	r24, 0xFE	; 254
+  b8:	88 b9       	out	0x08, r24	; 8
+	PORTC &= ~(1 << PORTC1); // output for in4
+  ba:	88 b1       	in	r24, 0x08	; 8
+  bc:	8d 7f       	andi	r24, 0xFD	; 253
+  be:	88 b9       	out	0x08, r24	; 8
+	PORTC &= ~(1 << PORTC2); // output for buzzer
+  c0:	88 b1       	in	r24, 0x08	; 8
+  c2:	8b 7f       	andi	r24, 0xFB	; 251
+  c4:	88 b9       	out	0x08, r24	; 8
+	i = 0; // Initial duty cycle for 50% speed
+  c6:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+  ca:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+	pwm_init(); // Initialize PWM
+  ce:	0e 94 48 00 	call	0x90	; 0x90 <_Z8pwm_initv>
+	DDRD &= ~(1 << DDD2);
+  d2:	8a b1       	in	r24, 0x0a	; 10
+  d4:	8b 7f       	andi	r24, 0xFB	; 251
+  d6:	8a b9       	out	0x0a, r24	; 10
+	PORTD |= (1 << PORTD2);
+  d8:	8b b1       	in	r24, 0x0b	; 11
+  da:	84 60       	ori	r24, 0x04	; 4
+  dc:	8b b9       	out	0x0b, r24	; 11
+	DDRD &= ~(1 << DDD3);
+  de:	8a b1       	in	r24, 0x0a	; 10
+  e0:	87 7f       	andi	r24, 0xF7	; 247
+  e2:	8a b9       	out	0x0a, r24	; 10
+	PORTD |= (1 << PORTD3);
+  e4:	8b b1       	in	r24, 0x0b	; 11
+  e6:	88 60       	ori	r24, 0x08	; 8
+  e8:	8b b9       	out	0x0b, r24	; 11
+
+	// Falling edge of INT0 and INT1 generates an interrupt request
+	EICRA = (1 << ISC01) | (1 << ISC11);
+  ea:	8a e0       	ldi	r24, 0x0A	; 10
+  ec:	80 93 69 00 	sts	0x0069, r24	; 0x800069 <__TEXT_REGION_LENGTH__+0x7f8069>
+
+	// Enable external interrupts INT0 and INT1
+	EIMSK = (1 << INT0) | (1 << INT1);
+  f0:	83 e0       	ldi	r24, 0x03	; 3
+  f2:	8d bb       	out	0x1d, r24	; 29
+
+	sei();  // Enable global interrupts
+  f4:	78 94       	sei
+	
+	while (1) {
+		OCR1A = i; // Set PWM duty cycle for OCRA
+  f6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+  fa:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+  fe:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 102:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+		OCR1B = i *2 ;  // 130/100; // Set PWM duty cycle for OCRB to be 30% more than OCRA
+ 106:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 10a:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 10e:	88 0f       	add	r24, r24
+ 110:	99 1f       	adc	r25, r25
+ 112:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+ 116:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 11a:	2f ef       	ldi	r18, 0xFF	; 255
+ 11c:	81 ee       	ldi	r24, 0xE1	; 225
+ 11e:	94 e0       	ldi	r25, 0x04	; 4
+ 120:	21 50       	subi	r18, 0x01	; 1
+ 122:	80 40       	sbci	r24, 0x00	; 0
+ 124:	90 40       	sbci	r25, 0x00	; 0
+ 126:	e1 f7       	brne	.-8      	; 0x120 <main+0x7c>
+ 128:	00 c0       	rjmp	.+0      	; 0x12a <main+0x86>
+ 12a:	00 00       	nop
+ 12c:	e4 cf       	rjmp	.-56     	; 0xf6 <main+0x52>
+
+0000012e <__vector_1>:
+
+	return 0;
+}
+
+// Interrupt Service Routine for INT0
+ISR(INT0_vect) {
+ 12e:	1f 92       	push	r1
+ 130:	0f 92       	push	r0
+ 132:	0f b6       	in	r0, 0x3f	; 63
+ 134:	0f 92       	push	r0
+ 136:	11 24       	eor	r1, r1
+ 138:	2f 93       	push	r18
+ 13a:	8f 93       	push	r24
+ 13c:	9f 93       	push	r25
+	if (i >=0)
+ 13e:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 142:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 146:	99 23       	and	r25, r25
+ 148:	9c f0       	brlt	.+38     	; 0x170 <__vector_1+0x42>
+	{
+		PORTC &= ~(1 << PORTC0);
+ 14a:	88 b1       	in	r24, 0x08	; 8
+ 14c:	8e 7f       	andi	r24, 0xFE	; 254
+ 14e:	88 b9       	out	0x08, r24	; 8
+		PORTC &= ~(1 << PORTC1);
+ 150:	88 b1       	in	r24, 0x08	; 8
+ 152:	8d 7f       	andi	r24, 0xFD	; 253
+ 154:	88 b9       	out	0x08, r24	; 8
+		PORTC &= ~(1 << PORTC2);
+ 156:	88 b1       	in	r24, 0x08	; 8
+ 158:	8b 7f       	andi	r24, 0xFB	; 251
+ 15a:	88 b9       	out	0x08, r24	; 8
+		i += 30; // Increase duty cycle for higher speed
+ 15c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 160:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 164:	4e 96       	adiw	r24, 0x1e	; 30
+ 166:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 16a:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 16e:	1a c0       	rjmp	.+52     	; 0x1a4 <__vector_1+0x76>
+	}
+	else if (i < 0)
+ 170:	99 23       	and	r25, r25
+ 172:	9c f4       	brge	.+38     	; 0x19a <__vector_1+0x6c>
+	{
+		PORTC |= (1 << PORTC0);
+ 174:	88 b1       	in	r24, 0x08	; 8
+ 176:	81 60       	ori	r24, 0x01	; 1
+ 178:	88 b9       	out	0x08, r24	; 8
+		PORTC |= (1 << PORTC1);
+ 17a:	88 b1       	in	r24, 0x08	; 8
+ 17c:	82 60       	ori	r24, 0x02	; 2
+ 17e:	88 b9       	out	0x08, r24	; 8
+		PORTC |= (1 << PORTC2);
+ 180:	88 b1       	in	r24, 0x08	; 8
+ 182:	84 60       	ori	r24, 0x04	; 4
+ 184:	88 b9       	out	0x08, r24	; 8
+		i += 30; // Increase duty cycle for higher speed
+ 186:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 18a:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 18e:	4e 96       	adiw	r24, 0x1e	; 30
+ 190:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 194:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 198:	05 c0       	rjmp	.+10     	; 0x1a4 <__vector_1+0x76>
+	} 
+	else
+	{
+		i += 30; // Increase duty cycle for higher speed
+ 19a:	4e 96       	adiw	r24, 0x1e	; 30
+ 19c:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 1a0:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+	}
+
+   	if(i==540)
+ 1a4:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 1a8:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 1ac:	8c 31       	cpi	r24, 0x1C	; 28
+ 1ae:	22 e0       	ldi	r18, 0x02	; 2
+ 1b0:	92 07       	cpc	r25, r18
+ 1b2:	21 f4       	brne	.+8      	; 0x1bc <__vector_1+0x8e>
+   	{
+	   	PORTC |= (1 << PORTC2);
+ 1b4:	88 b1       	in	r24, 0x08	; 8
+ 1b6:	84 60       	ori	r24, 0x04	; 4
+ 1b8:	88 b9       	out	0x08, r24	; 8
+ 1ba:	0c c0       	rjmp	.+24     	; 0x1d4 <__vector_1+0xa6>
+   	}
+   	else if(i >= 1020)
+ 1bc:	8c 3f       	cpi	r24, 0xFC	; 252
+ 1be:	93 40       	sbci	r25, 0x03	; 3
+ 1c0:	4c f0       	brlt	.+18     	; 0x1d4 <__vector_1+0xa6>
+   	{
+	   	PORTC |= (1 << PORTC2);
+ 1c2:	88 b1       	in	r24, 0x08	; 8
+ 1c4:	84 60       	ori	r24, 0x04	; 4
+ 1c6:	88 b9       	out	0x08, r24	; 8
+	   	i=1020;
+ 1c8:	8c ef       	ldi	r24, 0xFC	; 252
+ 1ca:	93 e0       	ldi	r25, 0x03	; 3
+ 1cc:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 1d0:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+   	}
+	
+}
+ 1d4:	9f 91       	pop	r25
+ 1d6:	8f 91       	pop	r24
+ 1d8:	2f 91       	pop	r18
+ 1da:	0f 90       	pop	r0
+ 1dc:	0f be       	out	0x3f, r0	; 63
+ 1de:	0f 90       	pop	r0
+ 1e0:	1f 90       	pop	r1
+ 1e2:	18 95       	reti
+
+000001e4 <__vector_2>:
+
+// Interrupt Service Routine for INT1
+ISR(INT1_vect) {
+ 1e4:	1f 92       	push	r1
+ 1e6:	0f 92       	push	r0
+ 1e8:	0f b6       	in	r0, 0x3f	; 63
+ 1ea:	0f 92       	push	r0
+ 1ec:	11 24       	eor	r1, r1
+ 1ee:	2f 93       	push	r18
+ 1f0:	8f 93       	push	r24
+ 1f2:	9f 93       	push	r25
+	i -= 30; // Decrease duty cycle for lower speed
+ 1f4:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 1f8:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 1fc:	4e 97       	sbiw	r24, 0x1e	; 30
+ 1fe:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 202:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+	if (i < 30) {
+ 206:	8e 31       	cpi	r24, 0x1E	; 30
+ 208:	91 05       	cpc	r25, r1
+ 20a:	74 f4       	brge	.+28     	; 0x228 <__vector_2+0x44>
+		
+		PORTC |= (1 << PORTC0);
+ 20c:	88 b1       	in	r24, 0x08	; 8
+ 20e:	81 60       	ori	r24, 0x01	; 1
+ 210:	88 b9       	out	0x08, r24	; 8
+		PORTC |= (1 << PORTC1);
+ 212:	88 b1       	in	r24, 0x08	; 8
+ 214:	82 60       	ori	r24, 0x02	; 2
+ 216:	88 b9       	out	0x08, r24	; 8
+		PORTC |= (1 << PORTC2);
+ 218:	88 b1       	in	r24, 0x08	; 8
+ 21a:	84 60       	ori	r24, 0x04	; 4
+ 21c:	88 b9       	out	0x08, r24	; 8
+		i = 0;
+ 21e:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+ 222:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__DATA_REGION_ORIGIN__>
+ 226:	06 c0       	rjmp	.+12     	; 0x234 <__vector_2+0x50>
+	}
+	else if(i <= 1020)
+ 228:	8d 3f       	cpi	r24, 0xFD	; 253
+ 22a:	93 40       	sbci	r25, 0x03	; 3
+ 22c:	1c f4       	brge	.+6      	; 0x234 <__vector_2+0x50>
+	{
+	    PORTC &= ~(1 << PORTC2);
+ 22e:	88 b1       	in	r24, 0x08	; 8
+ 230:	8b 7f       	andi	r24, 0xFB	; 251
+ 232:	88 b9       	out	0x08, r24	; 8
+	 }
+}
+ 234:	9f 91       	pop	r25
+ 236:	8f 91       	pop	r24
+ 238:	2f 91       	pop	r18
+ 23a:	0f 90       	pop	r0
+ 23c:	0f be       	out	0x3f, r0	; 63
+ 23e:	0f 90       	pop	r0
+ 240:	1f 90       	pop	r1
+ 242:	18 95       	reti
+
+00000244 <_exit>:
+ 244:	f8 94       	cli
+
+00000246 <__stop_program>:
+ 246:	ff cf       	rjmp	.-2      	; 0x246 <__stop_program>
